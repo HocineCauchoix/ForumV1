@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File d'actualité</title>
+  <link rel="stylesheet" href="css/test.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Permanent+Marker&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="button" id="button-container">      
+        <div class="box">F </div>
+        <div class="box">O</div>
+        <div class="box">R</div>
+        <div class="box">U</div>
+        <div class="box">M</div>
+    </div>
+      <nav>
+        <ul>
+          <li>
+            <form action="/actualite" method="post">
+              <input type="submit" value="Accueil">
+            </form>
+          </li>
+          <form action="/publicationCheck" method="post">
+            <li>
+              <input type="submit" value="Publication">
+            </li>
+          </form>
+          <li>
+            <form action="/message" method="post">
+              <input type="submit" value="Message">
+            </form>
+          </li>
+          <li class="profile">
+            <form action="/compte" method="post">
+              <input type="submit" value="Compte">
+            </form>
+            <ul class="dropdown-menu">
+              <li>
+                <form action="/compte" method="get">
+                  <input type="submit" value="Mon compte">
+                </form>
+              </li>
+              <li>
+                <form action="/deconnexion" method="get">
+                  <input type="submit" value="Déconnexion">
+                </form>
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+      </nav>
+    </header>
+    
+    <style>
+      .comment-list {
+        margin-top: 10px;
+        padding-left: 20px;
+        list-style-type: none;
+      }
+      .comment-list li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="content">
+        <h1>File d'actualité de <span id="username"></span></h1>
+        {{range .}}
+        <div class="post">
+          <div class="post-header">
+            <div class="post-user">
+              <p id="username"></p>
+            </div>
+            <div class="post-timestamp"></div>
+          </div>
+          <div class="post-content">
+            <p>{{.Nom }}</p>
+            <p>{{.Contenu}}</p>
+            <p>{{.Lieux}}</p>
+          </div>
+          <div class="post-footer">
+            <span>{{.Likes}}</span>
+            <form action="/like" method="POST">
+              <input type="hidden" name="postID" value="{{.ID}}">
+              <button type="submit" class="like-button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                  <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                </svg>
+              </button>
+            </form>
+            <button class="comment-button" onclick="toggleComments(this)">Afficher les commentaires</button>
+          </div>
+          <div class="comment-box">
+            <form id="comment-form" action="/commentaire" method="POST">
+              <input type="hidden" name="postID" value="{{ .ID }}">
+              <input type="text" name="contenu" placeholder="Votre commentaire" required>
+              <input type="submit" value="Ajouter un commentaire">
+            </form>
+            <ul class="comment-list">
+              {{range .Commentaires}}
+              <li>{{.Contenu}}</li>
+              {{end}}
+            </ul>
+          </div>
+        </div>
+        {{end}}
+      </div>
+  
+      <script>
+        function toggleComments(button) {
+          var commentBox = button.parentNode.parentNode.querySelector(".comment-box");
+          commentBox.style.display = commentBox.style.display === "none" ? "block" : "none";
+        }
+      </script>
+  
+      <script>
+        var usernameElement = document.getElementById("username");
+        // Récupérer la valeur du cookie "username"
+        var username = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*=\s*([^;]*).*$)|^.*$/, "$1");
+        // Afficher la valeur du cookie dans l'élément HTML
+        usernameElement.textContent = username;
+  
+        // Écouteur d'événement sur les boutons "J'aime"
+        const likeButtons = document.querySelectorAll('.like-button');
+        likeButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            this.classList.toggle('liked');
+          });
+        });
+  
+        // Écouteur d'événement sur les boutons "Commenter"
+        const commentButtons = document.querySelectorAll('.comment-button');
+        commentButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const commentBox = this.parentNode.nextElementSibling;
+            commentBox.classList.toggle('show');
+          });
+        });
+      </script>
+  
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $(".like-button").click(function() {
+            var postId = $(this).siblings("input[name='postID']").val();
+            // Récupère l'ID du post depuis l'attribut value de l'élément input
+            $.post("/add-like", { postId: postId }, function() {
+              alert("Le like a été ajouté avec succès !");
+              // Vous pouvez effectuer d'autres actions ou actualiser la page ici
+            });
+          });
+        });
+      </script>
+      <!-- Ajoutez ici les autres nouveaux posts -->
+    </main>
+  </body>
+  </html>

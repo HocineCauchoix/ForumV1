@@ -1,0 +1,133 @@
+/* Style général */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+
+  /* Ajouter l'image de fond */
+  background-image: url("/image/bleubackground.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* Appliquer l'animation de l'image de fond */
+  animation: animated-background 10s linear infinite;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-wrapper {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: 0 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f2f2f2;
+  font-family: 'Bungee Shade', cursive;
+  font-family: 'Permanent Marker', cursive;
+  size: 100px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #19678e;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #022246;
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+.social-media {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+/* Alignement des champs de formulaire pour le deuxième formulaire */
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation pulse */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Animation slide-in-bottom */
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Ajoutez ici d'autres animations selon vos besoins */
+/* Animation slide-in-top */
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Appliquer l'animation slide-in-top aux form-wrapper */
+.form-wrapper {
+  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Animation de l'image de fond */
+@keyframes animated-background {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}

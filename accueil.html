@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forum</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+
+</head>
+
+<body>
+  
+<h1>Forum</h1>
+  <div class="container">
+    <div class="form-wrapper">
+      <h2>S'Inscrire</h2>
+      <form action="/inscriptionCheck" method="post">
+        <label for="nom">Username:</label>
+              <input type="text" id="nom" name="nom" required>
+      
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+      
+              <label for="motdepasse">Mot de passe:</label>
+              <input type="password" id="motdepasse" name="motdepasse" required>
+      
+              <label for="confirmation">Confirmation Mot de passe:</label>
+              <input type="password" id="confirmation" name="confirmation" required>
+      
+              <input type="submit" value="S'inscrire">
+            </form>
+          </div>
+
+
+
+    <div class="form-wrapper">
+      <h2>Se Connecter</h2>
+      <div class="social-media">
+        <!-- Contenu du deuxième formulaire -->
+        <div class="inputs">
+            <form action="/connexionCheck" method="post">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+    
+              <label for="motdepasse">Mot de passe:</label>
+              <input type="password" id="motdepasse" name="motdepasse" required>
+    
+              <div style="text-align: center;">
+              <div class="toggle-container">
+                <input type="submit" value="Se Connecter">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire d'insertion</title>
+</head>
+<body>
+    <h2>Formulaire d'insertion</h2>
+
+    <form action="/inscriptionCheck" method="post">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="motdepasse">Mot de passe:</label>
+        <input type="password" id="motdepasse" name="motdepasse" required><br>
+
+        <input type="submit" value="Envoyer">
+    </form>
+
+
+    <form action="/connexionCheck" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+    
+        <label for="motDePasse">Mot de passe:</label>
+        <input type="password" id="motdepasse" name="motdepasse" required><br>
+    
+        <input type="submit" value="Se connecter">
+    </form>
+    
+</body>
+</html> -->

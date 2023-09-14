@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File d'actualité</title>
+  <link rel="stylesheet" href="css/test.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="button" id="button-container">      
+      <div class="box">F </div>
+      <div class="box">O</div>
+      <div class="box">R</div>
+      <div class="box">U</div>
+      <div class="box">M</div>
+  </div>
+
+  <script>
+    // Sélectionnez l'élément avec l'identifiant "button-container"
+    var buttonContainer = document.getElementById("button-container");
+  
+    // Ajoutez un gestionnaire d'événement "click" à l'élément
+    buttonContainer.addEventListener("click", function() {
+      // Redirigez vers la page "actualite.html"
+      window.location.href = "actualite.html";
+    });
+  </script>
+   <nav>
+    <ul>
+      <li>
+        <form action="/actualite" method="post">
+          <input type="submit" value="Accueil">
+        </form>
+      </li>
+      <form action="/publicationCheck" method="post">
+        <li>
+          <input type="submit" value="Publication">
+        </li>
+      </form>
+      <li>
+        <form action="/message" method="post">
+          <input type="submit" value="Message">
+        </form>
+      </li>
+      <li class="profile">
+        <form action="/compte" method="post">
+          <input type="submit" value="Compte">
+        </form>
+        <ul class="dropdown-menu">
+          <li>
+            <form action="/compte" method="get">
+              <input type="submit" value="Mon compte">
+            </form>
+          </li>
+          <li>
+            <form action="/Forum1/compte.html" method="get">
+              <input type="submit" value="Déconnexion">
+            </form>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  </header>
+
+  <main>
+    <div class="content">
+  <h1>Nouvelle Publication</h1>
+  <form class="message-form" method="POST" action="/publication">
+    <input type="text" id="objet" name="objet" placeholder="Objet" required>
+    <input type="text" id="lieux" name="lieux" placeholder="Lieux" required>
+    <ul id="suggestions"></ul>
+    <textarea required name="contenu" id="message" placeholder="Saisissez votre message"></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+    
+
+      <script>// Tableau de villes de démonstration
+        const villes = [
+"New York",
+"Paris",
+"Tokyo",
+"Londres",
+"Berlin",
+"Sydney",
+"Rome",
+"Moscou",
+"Pékin",
+"Le Caire",
+"Mumbai",
+"São Paulo",
+"Mexico",
+"Toronto",
+"Dubaï",
+"Amsterdam",
+"Singapour",
+"Istanbul",
+"Bangkok",
+"Stockholm",
+"Johannesburg",
+"Buenos Aires",
+"Rio de Janeiro",
+"Los Angeles",
+"Madrid",
+"Vienne",
+"Prague",
+"Marseille",
+"Evreux",
+"Varsovie",
+"Séoul",
+"Hong Kong",
+"Riyad",
+"Kiev",
+"Budapest",
+"Oslo",
+"Copenhague",
+"Zurich",
+"Athènes",
+"Dakar",
+"Nairobi",
+"Lima",
+"Montréal",
+"Toronto",
+"Vancouver",
+"Barcelone",
+"Milan",
+"San Francisco",
+"Chicago",
+"Washington D.C.",
+"Seattle",
+"Dublin",
+"Bruxelles",
+"Lisbonne",
+"Wellington",
+"Le Cap",
+"Bangalore",
+"Manille",
+"Santiago",
+"La Havane",
+"Bogota",
+"Le Caire",
+"Accra",
+"Jakarta",
+"Auckland",
+        ];
+        
+        // Écouteur d'événement sur la saisie de la case "Lieux"
+        document.getElementById("lieux").addEventListener("input", function(event) {
+          const input = event.target;
+          const value = input.value.trim().toLowerCase();
+          const suggestions = document.getElementById("suggestions");
+        
+          // Effacer les anciennes suggestions
+          suggestions.innerHTML = "";
+        
+          // Afficher les nouvelles suggestions
+          if (value.length >= 3) {
+            const filteredCities = villes.filter(function(ville) {
+              return ville.toLowerCase().startsWith(value);
+            });
+        
+            filteredCities.forEach(function(ville) {
+              const li = document.createElement("li");
+              li.textContent = ville;
+              suggestions.appendChild(li);
+            });
+          }
+        });
+        
+        // Écouteur d'événement sur les suggestions de villes
+document.getElementById("suggestions").addEventListener("click", function(event) {
+  const clickedItem = event.target;
+  const lieuxInput = document.getElementById("lieux");
+
+  // Vérifier si l'élément cliqué est un <li>
+  if (clickedItem.tagName.toLowerCase() === "li") {
+    const selectedCity = clickedItem.textContent;
+    lieuxInput.value = selectedCity;
+    document.getElementById("suggestions").innerHTML = ""; // Effacer les suggestions
+  }
+});
+
+        </script>
+
+      <!-- Liste des posts -->
+    </div>
+  </main>
+
+  <footer>
+    <!-- Pied de page -->
+  </footer>
+</body>
+</html>
